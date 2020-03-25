@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const exampleUrl = 'https://capi-v2.sankakucomplex.com/posts?lang=en&page=1&limit=40&hide_posts_in_books=in-larger-tags&default_threshold=1&tags=nekomimi'
+const exampleUrl = 'https://capi-v2.sankakucomplex.com/posts?lang=en&page=2&limit=10&hide_posts_in_books=in-larger-tags&default_threshold=1&tags=rating:safe+nekomimi'
 const requestBaseUrl = 'https://capi-v2.sankakucomplex.com/posts'
 
 const imageType = 'image';
@@ -20,8 +20,6 @@ class DeflatedSankImage {
     this.height = jsonObject.height;
   }
 }
-
-  
 
 exports.requestSankImages = () => { 
   return axios.get(exampleUrl)
