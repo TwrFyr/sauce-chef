@@ -1,4 +1,4 @@
-const { requestSankImages } =  require('./sank-chan-requester.js');
+const { requestExampleSankImages: requestSankImages } =  require('./sank-chan-requester.js');
 
 requestSankImages()
   .then(response => {

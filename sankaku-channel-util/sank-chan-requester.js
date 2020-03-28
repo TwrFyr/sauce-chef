@@ -21,8 +21,22 @@ class DeflatedSankImage {
   }
 }
 
-exports.requestSankImages = () => { 
+exports.requestExampleSankImages = () => { 
   return axios.get(exampleUrl)
+  .then(response => 
+    response.data
+      .map(obj => new DeflatedSankImage(obj))
+      .filter(obj => obj.type.startsWith(imageType))
+  )
+  .catch(error => {
+    console.log(error);
+  });
+}
+
+exports.requestSankImagesDynamically = (params) => { 
+  return axios.get(requestBaseUrl, {
+    params: params
+  })
   .then(response => 
     response.data
       .map(obj => new DeflatedSankImage(obj))
