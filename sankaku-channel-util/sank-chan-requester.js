@@ -33,16 +33,10 @@ exports.requestExampleSankImages = () => {
   });
 }
 
-exports.requestSankImagesDynamically = (params) => { 
-  return axios.get(`${requestBaseUrl}?tags=${params.tags}`, {
-    params: {
-      lang: 'en',
-      page: '1',
-      limit: '5',
-      hide_posts_in_books: 'in-larger-tags',
-      default_threshold: '1',
-    }
-  })
+exports.requestSankImagesDynamically = (page, limit, params) => { 
+  const reducer = (acc, it) => (acc + '+' + it)
+  const paramString = params.length === 0 ? '' : `&tags=` + params.reduce(reducer);
+  return axios.get(`${requestBaseUrl}?lang=en&default_threshold=1&hide_posts_in_books=in-larger-tags&page=${page}&limit=${limit}${paramString}`)
   .then(response => 
     response.data
       .map(obj => new DeflatedSankImage(obj))
