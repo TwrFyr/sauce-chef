@@ -1,5 +1,5 @@
 const { prefix } = require('../config.json');
-const { requestSankImages } = require('../sankaku-channel-util/sank-chan-requester.js');
+const { requestExampleSankImages } = require('../sankaku-channel-util/sank-chan-requester.js');
 
 module.exports = {
   name: 'sr',

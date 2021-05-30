@@ -17,6 +17,7 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
   console.log('Ready!');
+  client.user.setActivity(`${prefix}help`, {type: 'LISTENING'});
 });
 
 client.on('message', (message) => {
@@ -26,8 +27,11 @@ client.on('message', (message) => {
   const commandName = args.shift().toLowerCase();
 
   // check if command is registered, else return
-  if (!client.commands.has(commandName)) return;
+  if (!client.commands.has(commandName)) {
+    return;
+  }
 
+  // handle invalid command usage
   const command = client.commands.get(commandName);
   if (command.guildOnly && message.channel.type !== 'text') {
     if (message.channel.type === 'dm') {
@@ -45,6 +49,7 @@ client.on('message', (message) => {
     return message.channel.send(reply);
   }
 
+  // handle command cooldowns
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection());
   }
