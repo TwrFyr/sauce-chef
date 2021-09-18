@@ -10,12 +10,16 @@ function _toSankakuDate(date) {
 }
 module.exports.toSankakuDate = _toSankakuDate;
 
+// build request url
+function _buildRequestUrl(tags, limit) {
+  const tagsString = tags ? `&tags=${tags.join('+')}` : '';
+  return `${base_url}?${default_params}&limit=${limit}${tagsString}`;
+}
+module.exports.buildRequestUrl = _buildRequestUrl;
+
 // gets the SankakuPosts queried using the given tags and the limit
 const _getPosts = (tags, limit = 40) => {
-  // build request
-  const tagsString = tags ? `&tags=${tags.join('+')}` : '';
-  const request_url = `${base_url}?${default_params}&limit=${limit}${tagsString}`;
-  console.log({request_url: request_url});
+  const request_url = _buildRequestUrl(tags, limit);
 
   // call api
   return axios.get(request_url)
