@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/TwrFyr/sauce-chef#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "discord.js": "^12.0.2",
     "lodash": "^4.17.15"
   },
